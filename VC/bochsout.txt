@@ -1,3 +1,4 @@
+擦擦擦擦擦
 00000000000i[     ] Bochs x86 Emulator 2.1.1
 00000000000i[     ]   February 08, 2004
 00000000000i[     ] System configuration
