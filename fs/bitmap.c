@@ -5,19 +5,19 @@
  */
 #include <set_seg.h>
 
-/* bitmap.c ³ÌÐòº¬ÓÐ´¦Àíi ½ÚµãºÍ´ÅÅÌ¿éÎ»Í¼µÄ´úÂë */
+/* bitmap.c ï¿½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½i ï¿½Úµï¿½Í´ï¿½ï¿½Ì¿ï¿½Î»Í¼ï¿½Ä´ï¿½ï¿½ï¿½ */
 
-// ×Ö·û´®Í·ÎÄ¼þ¡£Ö÷Òª¶¨ÒåÁËÒ»Ð©ÓÐ¹Ø×Ö·û´®²Ù×÷µÄÇ¶Èëº¯Êý¡£
-// Ö÷ÒªÊ¹ÓÃÁËÆäÖÐµÄmemset()º¯Êý¡£
+// ï¿½Ö·ï¿½Í·ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»Ð©ï¿½Ð¹ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Ç¶ï¿½ëº¯ï¿½ï¿½
+// ï¿½ï¿½ÒªÊ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½memset()ï¿½ï¿½ï¿½ï¿½
 #include <string.h>
-// µ÷¶È³ÌÐòÍ·ÎÄ¼þ£¬¶¨ÒåÁËÈÎÎñ½á¹¹task_struct¡¢³õÊ¼ÈÎÎñ0 µÄÊý¾Ý£¬
-// »¹ÓÐÒ»Ð©ÓÐ¹ØÃèÊö·û²ÎÊýÉèÖÃºÍ»ñÈ¡µÄÇ¶ÈëÊ½»ã±àº¯ÊýºêÓï¾ä¡£
+// ï¿½ï¿½È³ï¿½ï¿½ï¿½Í·ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½á¹¹task_structï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½0 ï¿½ï¿½ï¿½ï¿½Ý£ï¿½
+// ï¿½ï¿½ï¿½ï¿½Ò»Ð©ï¿½Ð¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÃºÍ»ï¿½È¡ï¿½ï¿½Ç¶ï¿½ï¿½Ê½ï¿½ï¿½àº¯ï¿½ï¿½ï¿½ï¿½ï¿½ä¡£
 #include <linux/sched.h>
-// ÄÚºËÍ·ÎÄ¼þ¡£º¬ÓÐÒ»Ð©ÄÚºË³£ÓÃº¯ÊýµÄÔ­ÐÎ¶¨Òå¡£
+// ï¿½Úºï¿½Í·ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»Ð©ï¿½ÚºË³ï¿½ï¿½Ãºï¿½ï¿½ï¿½ï¿½Ô­ï¿½Î¶ï¿½ï¿½å¡£
 #include <linux/kernel.h>
 
-//// ½«Ö¸¶¨µØÖ·(addr)´¦µÄÒ»¿éÄÚ´æÇåÁã¡£Ç¶Èë»ã±à³ÌÐòºê¡£
-// ÊäÈë£ºeax = 0£¬ecx = Êý¾Ý¿é´óÐ¡BLOCK_SIZE/4£¬edi = addr¡£
+//// ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½Ö·(addr)ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ï¿½ã¡£Ç¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê¡£
+// ï¿½ï¿½ï¿½ë£ºeax = 0ï¿½ï¿½ecx = ï¿½ï¿½Ý¿ï¿½ï¿½Ð¡BLOCK_SIZE/4ï¿½ï¿½edi = addrï¿½ï¿½
 extern _inline void clear_block(char *addr)
 {_asm{
 	pushf
@@ -29,13 +29,13 @@ extern _inline void clear_block(char *addr)
 	popf
 }}
 //#define clear_block(addr) \
-//__asm__("cld\n\t" \  /*Çå·½ÏòÎ»¡£*/
-//	"rep\n\t" \  /*ÖØ¸´Ö´ÐÐ´æ´¢Êý¾Ý£¨0£©¡£*/
+//__asm__("cld\n\t" \  /*ï¿½å·½ï¿½ï¿½Î»ï¿½ï¿½*/
+//	"rep\n\t" \  /*ï¿½Ø¸ï¿½Ö´ï¿½Ð´æ´¢ï¿½ï¿½Ý£ï¿½0ï¿½ï¿½ï¿½ï¿½*/
 //	"stosl" \
 //	::"a" (0),"c" (BLOCK_SIZE/4),"D" ((long) (addr)):"cx","di")
 
-//// ÖÃÎ»Ö¸¶¨µØÖ·¿ªÊ¼µÄµÚnr ¸öÎ»Æ«ÒÆ´¦µÄ±ÈÌØÎ»(nr ¿ÉÒÔ´óÓÚ32£¡)¡£·µ»ØÔ­±ÈÌØÎ»£¨0 »ò1£©¡£
-// ÊäÈë£º%0 - eax£¨·µ»ØÖµ)£¬%1 - eax(0)£»%2 - nr£¬Î»Æ«ÒÆÖµ£»%3 - (addr)£¬addr µÄÄÚÈÝ¡£
+//// ï¿½ï¿½Î»Ö¸ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½Ê¼ï¿½Äµï¿½nr ï¿½ï¿½Î»Æ«ï¿½Æ´ï¿½ï¿½Ä±ï¿½ï¿½ï¿½Î»(nr ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½32ï¿½ï¿½)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½0 ï¿½ï¿½1ï¿½ï¿½ï¿½ï¿½
+// ï¿½ï¿½ï¿½ë£º%0 - eaxï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ)ï¿½ï¿½%1 - eax(0)ï¿½ï¿½%2 - nrï¿½ï¿½Î»Æ«ï¿½ï¿½Öµï¿½ï¿½%3 - (addr)ï¿½ï¿½addr ï¿½ï¿½ï¿½ï¿½ï¿½Ý¡ï¿½
 extern _inline int set_bit(unsigned long nr,char* addr)
 {
 //	volatile register int __res;
@@ -44,7 +44,7 @@ extern _inline int set_bit(unsigned long nr,char* addr)
 		mov ebx,nr
 		mov edx,addr
 		bts [edx],ebx
-		setb al
+		setb al 
 //		mov __res,eax
 	}
 //	return __res;
@@ -55,8 +55,8 @@ extern _inline int set_bit(unsigned long nr,char* addr)
 //"=a" (res):"0" (0),"r" (nr),"m" (*(addr))); \
 //res;})
 
-//// ¸´Î»Ö¸¶¨µØÖ·¿ªÊ¼µÄµÚnr Î»Æ«ÒÆ´¦µÄ±ÈÌØÎ»¡£·µ»ØÔ­±ÈÌØÎ»µÄ·´Âë£¨1 »ò0£©¡£
-// ÊäÈë£º%0 - eax£¨·µ»ØÖµ)£¬%1 - eax(0)£»%2 - nr£¬Î»Æ«ÒÆÖµ£»%3 - (addr)£¬addr µÄÄÚÈÝ¡£
+//// ï¿½ï¿½Î»Ö¸ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½Ê¼ï¿½Äµï¿½nr Î»Æ«ï¿½Æ´ï¿½ï¿½Ä±ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ä·ï¿½ï¿½ë£¨1 ï¿½ï¿½0ï¿½ï¿½ï¿½ï¿½
+// ï¿½ï¿½ï¿½ë£º%0 - eaxï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ)ï¿½ï¿½%1 - eax(0)ï¿½ï¿½%2 - nrï¿½ï¿½Î»Æ«ï¿½ï¿½Öµï¿½ï¿½%3 - (addr)ï¿½ï¿½addr ï¿½ï¿½ï¿½ï¿½ï¿½Ý¡ï¿½
 extern _inline int clear_bit(unsigned long nr,char* addr)
 {
 //	volatile register int __res;
@@ -76,9 +76,9 @@ extern _inline int clear_bit(unsigned long nr,char* addr)
 //"=a" (res):"0" (0),"r" (nr),"m" (*(addr))); \
 //res;})
 
-//// ´Óaddr ¿ªÊ¼Ñ°ÕÒµÚ1 ¸ö0 Öµ±ÈÌØÎ»¡£
-// ÊäÈë£º%0 - ecx(·µ»ØÖµ)£»%1 - ecx(0)£»%2 - esi(addr)¡£
-// ÔÚaddr Ö¸¶¨µØÖ·¿ªÊ¼µÄÎ»Í¼ÖÐÑ°ÕÒµÚ1 ¸öÊÇ0 µÄ±ÈÌØÎ»£¬²¢½«Æä¾àÀëaddr µÄ±ÈÌØÎ»Æ«ÒÆÖµ·µ»Ø¡£
+//// ï¿½ï¿½addr ï¿½ï¿½Ê¼Ñ°ï¿½Òµï¿½1 ï¿½ï¿½0 Öµï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
+// ï¿½ï¿½ï¿½ë£º%0 - ecx(ï¿½ï¿½ï¿½ï¿½Öµ)ï¿½ï¿½%1 - ecx(0)ï¿½ï¿½%2 - esi(addr)ï¿½ï¿½
+// ï¿½ï¿½addr Ö¸ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½Ê¼ï¿½ï¿½Î»Í¼ï¿½ï¿½Ñ°ï¿½Òµï¿½1 ï¿½ï¿½ï¿½ï¿½0 ï¿½Ä±ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½addr ï¿½Ä±ï¿½ï¿½ï¿½Î»Æ«ï¿½ï¿½Öµï¿½ï¿½ï¿½Ø¡ï¿½
 extern _inline int find_first_zero(char *addr)
 {
 //	int __res;
@@ -86,17 +86,17 @@ extern _inline int find_first_zero(char *addr)
 		pushf
 		xor ecx,ecx
 		mov esi,addr
-		cld   /*Çå·½ÏòÎ»¡£*/
-	l1: lodsd   /*È¡[esi] -> eax¡£*/
-		not eax   /*eax ÖÐÃ¿Î»È¡·´¡£*/
-		bsf edx,eax   /*´ÓÎ»0 É¨Ãèeax ÖÐÊÇ1 µÄµÚ1 ¸öÎ»£¬ÆäÆ«ÒÆÖµ -> edx¡£*/
-		je l2   /*Èç¹ûeax ÖÐÈ«ÊÇ0£¬ÔòÏòÇ°Ìø×ªµ½±êºÅ2 ´¦(40 ÐÐ)¡£*/
-		add ecx,edx   /*Æ«ÒÆÖµ¼ÓÈëecx(ecx ÖÐÊÇÎ»Í¼ÖÐÊ×¸öÊÇ0 µÄ±ÈÌØÎ»µÄÆ«ÒÆÖµ)*/
-		jmp l3   /*ÏòÇ°Ìø×ªµ½±êºÅ3 ´¦£¨½áÊø£©¡£*/
-	l2: add ecx,32   /*Ã»ÓÐÕÒµ½0 ±ÈÌØÎ»£¬Ôò½«ecx ¼ÓÉÏ1 ¸ö³¤×ÖµÄÎ»Æ«ÒÆÁ¿32¡£*/
-		cmp ecx,8192   /*ÒÑ¾­É¨ÃèÁË8192 Î»£¨1024 ×Ö½Ú£©ÁËÂð£¿*/
-		jl l1  /*Èô»¹Ã»ÓÐÉ¨ÃèÍê1 ¿éÊý¾Ý£¬ÔòÏòÇ°Ìø×ªµ½±êºÅ1 ´¦£¬¼ÌÐø¡£*/
-//	l3: mov __res,ecx  /*½áÊø¡£´ËÊ±ecx ÖÐÊÇÎ»Æ«ÒÆÁ¿¡£*/
+		cld   /*ï¿½å·½ï¿½ï¿½Î»ï¿½ï¿½*/
+	l1: lodsd   /*È¡[esi] -> eaxï¿½ï¿½*/
+		not eax   /*eax ï¿½ï¿½Ã¿Î»È¡ï¿½ï¿½ï¿½ï¿½*/
+		bsf edx,eax   /*ï¿½ï¿½Î»0 É¨ï¿½ï¿½eax ï¿½ï¿½ï¿½ï¿½1 ï¿½Äµï¿½1 ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½Æ«ï¿½ï¿½Öµ -> edxï¿½ï¿½*/
+		je l2   /*ï¿½ï¿½ï¿½eax ï¿½ï¿½È«ï¿½ï¿½0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½2 ï¿½ï¿½(40 ï¿½ï¿½)ï¿½ï¿½*/
+		add ecx,edx   /*Æ«ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ecx(ecx ï¿½ï¿½ï¿½ï¿½Î»Í¼ï¿½ï¿½ï¿½×¸ï¿½ï¿½ï¿½0 ï¿½Ä±ï¿½ï¿½ï¿½Î»ï¿½ï¿½Æ«ï¿½ï¿½Öµ)*/
+		jmp l3   /*ï¿½ï¿½Ç°ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½3 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
+	l2: add ecx,32   /*Ã»ï¿½ï¿½ï¿½Òµï¿½0 ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ecx ï¿½ï¿½ï¿½ï¿½1 ï¿½ï¿½ï¿½Öµï¿½Î»Æ«ï¿½ï¿½ï¿½32ï¿½ï¿½*/
+		cmp ecx,8192   /*ï¿½Ñ¾ï¿½É¨ï¿½ï¿½ï¿½ï¿½8192 Î»ï¿½ï¿½1024 ï¿½Ö½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½*/
+		jl l1  /*ï¿½ï¿½Ã»ï¿½ï¿½É¨ï¿½ï¿½ï¿½ï¿½1 ï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½1 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
+//	l3: mov __res,ecx  /*ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ecx ï¿½ï¿½ï¿½ï¿½Î»Æ«ï¿½ï¿½ï¿½ï¿½ï¿½*/
 	l3: mov eax,ecx
 		popf
 	}
@@ -118,22 +118,22 @@ __asm__("cld\n" \
 	:"=c" (__res):"c" (0),"S" (addr):"ax","dx","si"); \
 __res;})*/
 
-//// ÊÍ·ÅÉè±¸dev ÉÏÊý¾ÝÇøÖÐµÄÂß¼­¿éblock¡£
-// ¸´Î»Ö¸¶¨Âß¼­¿éblock µÄÂß¼­¿éÎ»Í¼±ÈÌØÎ»¡£
-// ²ÎÊý£ºdev ÊÇÉè±¸ºÅ£¬block ÊÇÂß¼­¿éºÅ£¨ÅÌ¿éºÅ£©¡£
+//// ï¿½Í·ï¿½ï¿½è±¸dev ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ß¼ï¿½ï¿½ï¿½blockï¿½ï¿½
+// ï¿½ï¿½Î»Ö¸ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½block ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½Î»Í¼ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
+// ï¿½ï¿½ï¿½ï¿½dev ï¿½ï¿½ï¿½è±¸ï¿½Å£ï¿½block ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½Å£ï¿½ï¿½Ì¿ï¿½Å£ï¿½ï¿½ï¿½
 void free_block(int dev, int block)
 {
 	struct super_block * sb;
 	struct buffer_head * bh;
 
-// È¡Ö¸¶¨Éè±¸dev µÄ³¬¼¶¿é£¬Èç¹ûÖ¸¶¨Éè±¸²»´æÔÚ£¬Ôò³ö´íËÀ»ú¡£
+// È¡Ö¸ï¿½ï¿½ï¿½è±¸dev ï¿½Ä³ï¿½ï¿½ï¿½ï¿½é£¬ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if (!(sb = get_super(dev)))
 		panic("trying to free block on nonexistent device");
-// ÈôÂß¼­¿éºÅÐ¡ÓÚÊ×¸öÂß¼­¿éºÅ»òÕß´óÓÚÉè±¸ÉÏ×ÜÂß¼­¿éÊý£¬Ôò³ö´í£¬ËÀ»ú¡£
+// ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½×¸ï¿½ï¿½ß¼ï¿½ï¿½ï¿½Å»ï¿½ï¿½ß´ï¿½ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if (block < sb->s_firstdatazone || block >= sb->s_nzones)
 		panic("trying to free block not in datazone");
-// ´Óhash ±íÖÐÑ°ÕÒ¸Ã¿éÊý¾Ý¡£ÈôÕÒµ½ÁËÔòÅÐ¶ÏÆäÓÐÐ§ÐÔ£¬²¢ÇåÒÑÐÞ¸ÄºÍ¸üÐÂ±êÖ¾£¬ÊÍ·Å¸ÃÊý¾Ý¿é¡£
-// ¸Ã¶Î´úÂëµÄÖ÷ÒªÓÃÍ¾ÊÇÈç¹û¸ÃÂß¼­¿éµ±Ç°´æÔÚÓÚ¸ßËÙ»º³åÖÐ£¬¾ÍÊÍ·Å¶ÔÓ¦µÄ»º³å¿é¡£
+// ï¿½ï¿½hash ï¿½ï¿½ï¿½ï¿½Ñ°ï¿½Ò¸Ã¿ï¿½ï¿½ï¿½Ý¡ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½Ô£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸ÄºÍ¸ï¿½ï¿½Â±ï¿½Ö¾ï¿½ï¿½ï¿½Í·Å¸ï¿½ï¿½ï¿½Ý¿é¡£
+// ï¿½Ã¶Î´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½Í¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½éµ±Ç°ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½Ù»ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½ï¿½ï¿½Í·Å¶ï¿½Ó¦ï¿½Ä»ï¿½ï¿½ï¿½é¡£
 	bh = get_hash_table(dev,block);
 	if (bh) {
 		if (bh->b_count != 1) {
@@ -141,58 +141,58 @@ void free_block(int dev, int block)
 				dev,block,bh->b_count);
 			return;
 		}
-		bh->b_dirt=0;		// ¸´Î»Ôà£¨ÒÑÐÞ¸Ä£©±êÖ¾Î»¡£
-		bh->b_uptodate=0;	// ¸´Î»¸üÐÂ±êÖ¾¡£
+		bh->b_dirt=0;		// ï¿½ï¿½Î»ï¿½à£¨ï¿½ï¿½ï¿½Þ¸Ä£ï¿½ï¿½ï¿½Ö¾Î»ï¿½ï¿½
+		bh->b_uptodate=0;	// ï¿½ï¿½Î»ï¿½ï¿½ï¿½Â±ï¿½Ö¾ï¿½ï¿½
 		brelse(bh);
 	}
-// ¼ÆËãblock ÔÚÊý¾ÝÇø¿ªÊ¼ËãÆðµÄÊý¾ÝÂß¼­¿éºÅ£¨´Ó1 ¿ªÊ¼¼ÆÊý£©¡£È»ºó¶ÔÂß¼­¿é(Çø¿é)Î»Í¼½øÐÐ²Ù×÷£¬
-// ¸´Î»¶ÔÓ¦µÄ±ÈÌØÎ»¡£Èô¶ÔÓ¦±ÈÌØÎ»Ô­À´¼´ÊÇ0£¬Ôò³ö´í£¬ËÀ»ú¡£
+// ï¿½ï¿½ï¿½ï¿½block ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½Å£ï¿½ï¿½ï¿½1 ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½È»ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½)Î»Í¼ï¿½ï¿½ï¿½Ð²ï¿½ï¿½ï¿½
+// ï¿½ï¿½Î»ï¿½ï¿½Ó¦ï¿½Ä±ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½Î»Ô­ï¿½ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	block -= sb->s_firstdatazone - 1 ;
 	if (clear_bit(block&8191,sb->s_zmap[block/8192]->b_data)) {
 		printk("block (%04x:%d) ",dev,block+sb->s_firstdatazone-1);
 		panic("free_block: bit already cleared");
 	}
-	// ÖÃÏàÓ¦Âß¼­¿éÎ»Í¼ËùÔÚ»º³åÇøÒÑÐÞ¸Ä±êÖ¾¡£
+	// ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ß¼ï¿½ï¿½ï¿½Î»Í¼ï¿½ï¿½ï¿½Ú»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸Ä±ï¿½Ö¾ï¿½ï¿½
 	sb->s_zmap[block/8192]->b_dirt = 1;
 }
 
-////ÏòÉè±¸dev ÉêÇëÒ»¸öÂß¼­¿é£¨ÅÌ¿é£¬Çø¿é£©¡£·µ»ØÂß¼­¿éºÅ£¨ÅÌ¿éºÅ£©¡£
-// ÖÃÎ»Ö¸¶¨Âß¼­¿éblock µÄÂß¼­¿éÎ»Í¼±ÈÌØÎ»¡£
+////ï¿½ï¿½ï¿½è±¸dev ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ß¼ï¿½ï¿½é£¨ï¿½Ì¿é£¬ï¿½ï¿½é£©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½Å£ï¿½ï¿½Ì¿ï¿½Å£ï¿½ï¿½ï¿½
+// ï¿½ï¿½Î»Ö¸ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½block ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½Î»Í¼ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
 int new_block(int dev)
 {
 	struct buffer_head * bh;
 	struct super_block * sb;
 	int i,j;
 
-// ´ÓÉè±¸dev È¡³¬¼¶¿é£¬Èç¹ûÖ¸¶¨Éè±¸²»´æÔÚ£¬Ôò³ö´íËÀ»ú¡£
+// ï¿½ï¿½ï¿½è±¸dev È¡ï¿½ï¿½ï¿½ï¿½ï¿½é£¬ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if (!(sb = get_super(dev)))
 		panic("trying to get new block from nonexistant device");
-// É¨ÃèÂß¼­¿éÎ»Í¼£¬Ñ°ÕÒÊ×¸ö0 ±ÈÌØÎ»£¬Ñ°ÕÒ¿ÕÏÐÂß¼­¿é£¬»ñÈ¡·ÅÖÃ¸ÃÂß¼­¿éµÄ¿éºÅ¡£
+// É¨ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½Î»Í¼ï¿½ï¿½Ñ°ï¿½ï¿½ï¿½×¸ï¿½0 ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½Ñ°ï¿½Ò¿ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½é£¬ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½ß¼ï¿½ï¿½ï¿½Ä¿ï¿½Å¡ï¿½
 	j = 8192;
 	for (i=0 ; i<8 ; i++)
 		if (bh=sb->s_zmap[i])
 			if ((j=find_first_zero(bh->b_data))<8192)
 				break;
-// Èç¹ûÈ«²¿É¨ÃèÍê»¹Ã»ÕÒµ½(i>=8 »òj>=8192)»òÕßÎ»Í¼ËùÔÚµÄ»º³å¿éÎÞÐ§(bh=NULL)Ôò·µ»Ø0£¬
-// ÍË³ö£¨Ã»ÓÐ¿ÕÏÐÂß¼­¿é£©¡£
+// ï¿½ï¿½ï¿½È«ï¿½ï¿½É¨ï¿½ï¿½ï¿½ê»¹Ã»ï¿½Òµï¿½(i>=8 ï¿½ï¿½j>=8192)ï¿½ï¿½ï¿½ï¿½Î»Í¼ï¿½ï¿½ï¿½ÚµÄ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§(bh=NULL)ï¿½ò·µ»ï¿½0ï¿½ï¿½
+// ï¿½Ë³ï¿½Ã»ï¿½Ð¿ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½é£©ï¿½ï¿½
 	if (i>=8 || !bh || j>=8192)
 		return 0;
-// ÉèÖÃÐÂÂß¼­¿é¶ÔÓ¦Âß¼­¿éÎ»Í¼ÖÐµÄ±ÈÌØÎ»£¬Èô¶ÔÓ¦±ÈÌØÎ»ÒÑ¾­ÖÃÎ»£¬Ôò³ö´í£¬ËÀ»ú¡£
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ß¼ï¿½ï¿½ï¿½Î»Í¼ï¿½ÐµÄ±ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ñ¾ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if (set_bit(j,bh->b_data))
 		panic("new_block: bit already set");
-// ÖÃ¶ÔÓ¦»º³åÇø¿éµÄÒÑÐÞ¸Ä±êÖ¾¡£Èç¹ûÐÂÂß¼­¿é´óÓÚ¸ÃÉè±¸ÉÏµÄ×ÜÂß¼­¿éÊý£¬ÔòËµÃ÷Ö¸¶¨Âß¼­¿éÔÚ
-// ¶ÔÓ¦Éè±¸ÉÏ²»´æÔÚ¡£ÉêÇëÊ§°Ü£¬·µ»Ø0£¬ÍË³ö¡£
+// ï¿½Ã¶ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸Ä±ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½è±¸ï¿½Ïµï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½
+// ï¿½ï¿½Ó¦ï¿½è±¸ï¿½Ï²ï¿½ï¿½ï¿½ï¿½Ú¡ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü£ï¿½ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½ï¿½Ë³ï¿½
 	bh->b_dirt = 1;
 	j += i*8192 + sb->s_firstdatazone-1;
 	if (j >= sb->s_nzones)
 		return 0;
-// ¶ÁÈ¡Éè±¸ÉÏµÄ¸ÃÐÂÂß¼­¿éÊý¾Ý£¨ÑéÖ¤£©¡£Èç¹ûÊ§°ÜÔòËÀ»ú¡£
+// ï¿½ï¿½È¡ï¿½è±¸ï¿½ÏµÄ¸ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if (!(bh=getblk(dev,j)))
 		panic("new_block: cannot get block");
-// ÐÂ¿éµÄÒýÓÃ¼ÆÊýÓ¦Îª1¡£·ñÔòËÀ»ú¡£
+// ï¿½Â¿ï¿½ï¿½ï¿½ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½Ó¦Îª1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if (bh->b_count != 1)
 		panic("new block: count is != 1");
-// ½«¸ÃÐÂÂß¼­¿éÇåÁã£¬²¢ÖÃÎ»¸üÐÂ±êÖ¾ºÍÒÑÐÞ¸Ä±êÖ¾¡£È»ºóÊÍ·Å¶ÔÓ¦»º³åÇø£¬·µ»ØÂß¼­¿éºÅ¡£
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã£¬ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½Â±ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸Ä±ï¿½Ö¾ï¿½ï¿½È»ï¿½ï¿½ï¿½Í·Å¶ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½Å¡ï¿½
 	clear_block(bh->b_data);
 	bh->b_uptodate = 1;
 	bh->b_dirt = 1;
@@ -200,49 +200,49 @@ int new_block(int dev)
 	return j;
 }
 
-//// ÊÍ·ÅÖ¸¶¨µÄi ½Úµã¡£
-// ¸´Î»¶ÔÓ¦i ½ÚµãÎ»Í¼±ÈÌØÎ»¡£
+//// ï¿½Í·ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½i ï¿½Úµã¡£
+// ï¿½ï¿½Î»ï¿½ï¿½Ó¦i ï¿½Úµï¿½Î»Í¼ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
 void free_inode(struct m_inode * inode)
 {
 	struct super_block * sb;
 	struct buffer_head * bh;
 
-	// Èç¹ûi ½ÚµãÖ¸Õë=NULL£¬ÔòÍË³ö¡£
+	// ï¿½ï¿½ï¿½i ï¿½Úµï¿½Ö¸ï¿½ï¿½=NULLï¿½ï¿½ï¿½ï¿½ï¿½Ë³ï¿½
 	if (!inode)
 		return;
-// Èç¹ûi ½ÚµãÉÏµÄÉè±¸ºÅ×Ö¶ÎÎª0£¬ËµÃ÷¸Ã½ÚµãÎÞÓÃ£¬ÔòÓÃ0 Çå¿Õ¶ÔÓ¦i ½ÚµãËùÕ¼ÄÚ´æÇø£¬²¢·µ»Ø¡£
+// ï¿½ï¿½ï¿½i ï¿½Úµï¿½ï¿½Ïµï¿½ï¿½è±¸ï¿½ï¿½ï¿½Ö¶ï¿½Îª0ï¿½ï¿½Ëµï¿½ï¿½Ã½Úµï¿½ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½0 ï¿½ï¿½Õ¶ï¿½Ó¦i ï¿½Úµï¿½ï¿½ï¿½Õ¼ï¿½Ú´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¡ï¿½
 	if (!inode->i_dev) {
 		memset(inode,0,sizeof(*inode));
 		return;
 	}
-// Èç¹û´Ëi ½Úµã»¹ÓÐÆäËü³ÌÐòÒýÓÃ£¬Ôò²»ÄÜÊÍ·Å£¬ËµÃ÷ÄÚºËÓÐÎÊÌâ£¬ËÀ»ú¡£
+// ï¿½ï¿½ï¿½ï¿½i ï¿½Úµã»¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í·Å£ï¿½Ëµï¿½ï¿½ï¿½Úºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â£¬ï¿½ï¿½ï¿½
 	if (inode->i_count>1) {
 		printk("trying to free inode with count=%d\n",inode->i_count);
 		panic("free_inode");
 	}
-// Èç¹ûÎÄ¼þÄ¿Â¼ÏîÁ¬½ÓÊý²»Îª0£¬Ôò±íÊ¾»¹ÓÐÆäËüÎÄ¼þÄ¿Â¼ÏîÔÚÊ¹ÓÃ¸Ã½Úµã£¬
-// ²»Ó¦ÊÍ·Å£¬¶øÓ¦¸Ã·Å»ØµÈ¡£
+// ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Ä¿Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª0ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Ä¿Â¼ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½Ã¸Ã½Úµã£¬
+// ï¿½ï¿½Ó¦ï¿½Í·Å£ï¿½ï¿½ï¿½Ó¦ï¿½Ã·Å»ØµÈ¡ï¿½
 	if (inode->i_nlinks)
 		panic("trying to free inode with links");
-// È¡i ½ÚµãËùÔÚÉè±¸µÄ³¬¼¶¿é£¬²âÊÔÉè±¸ÊÇ·ñ´æÔÚ¡£
+// È¡i ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è±¸ï¿½Ä³ï¿½ï¿½ï¿½ï¿½é£¬ï¿½ï¿½ï¿½ï¿½ï¿½è±¸ï¿½Ç·ï¿½ï¿½ï¿½Ú¡ï¿½
 	if (!(sb = get_super(inode->i_dev)))
 		panic("trying to free inode on nonexistent device");
-// Èç¹ûi ½ÚµãºÅ=0 »ò´óÓÚ¸ÃÉè±¸ÉÏi ½Úµã×ÜÊý£¬Ôò³ö´í£¨0 ºÅi ½Úµã±£ÁôÃ»ÓÐÊ¹ÓÃ£©¡£
+// ï¿½ï¿½ï¿½i ï¿½Úµï¿½ï¿½=0 ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½è±¸ï¿½ï¿½i ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0 ï¿½ï¿½i ï¿½Úµã±£ï¿½ï¿½Ã»ï¿½ï¿½Ê¹ï¿½Ã£ï¿½ï¿½ï¿½
 	if (inode->i_num < 1 || inode->i_num > sb->s_ninodes)
 		panic("trying to free inode 0 or nonexistant inode");
-// Èç¹û¸Ãi ½Úµã¶ÔÓ¦µÄ½ÚµãÎ»Í¼²»´æÔÚ£¬Ôò³ö´í¡£
+// ï¿½ï¿½ï¿½ï¿½i ï¿½Úµï¿½ï¿½Ó¦ï¿½Ä½Úµï¿½Î»Í¼ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½
 	if (!(bh=sb->s_imap[inode->i_num>>13]))
 		panic("nonexistent imap in superblock");
-// ¸´Î»i ½Úµã¶ÔÓ¦µÄ½ÚµãÎ»Í¼ÖÐµÄ±ÈÌØÎ»£¬Èç¹û¸Ã±ÈÌØÎ»ÒÑ¾­µÈÓÚ0£¬Ôò³ö´í¡£
+// ï¿½ï¿½Î»i ï¿½Úµï¿½ï¿½Ó¦ï¿½Ä½Úµï¿½Î»Í¼ï¿½ÐµÄ±ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½Ã±ï¿½ï¿½ï¿½Î»ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if (clear_bit(inode->i_num&8191,bh->b_data))
 		printk("free_inode: bit already cleared.\n\r");
-// ÖÃi ½ÚµãÎ»Í¼ËùÔÚ»º³åÇøÒÑÐÞ¸Ä±êÖ¾£¬²¢Çå¿Õ¸Ãi ½Úµã½á¹¹ËùÕ¼ÄÚ´æÇø¡£
+// ï¿½ï¿½i ï¿½Úµï¿½Î»Í¼ï¿½ï¿½ï¿½Ú»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸Ä±ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¸ï¿½i ï¿½Úµï¿½á¹¹ï¿½ï¿½Õ¼ï¿½Ú´ï¿½ï¿½ï¿½
 	bh->b_dirt = 1;
 	memset(inode,0,sizeof(*inode));
 }
 
-//// ÎªÉè±¸dev ½¨Á¢Ò»¸öÐÂi ½Úµã¡£·µ»Ø¸ÃÐÂi ½ÚµãµÄÖ¸Õë¡£
-// ÔÚÄÚ´æi ½Úµã±íÖÐ»ñÈ¡Ò»¸ö¿ÕÏÐi ½Úµã±íÏî£¬²¢´Ói ½ÚµãÎ»Í¼ÖÐÕÒÒ»¸ö¿ÕÏÐi ½Úµã¡£
+//// Îªï¿½è±¸dev ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½i ï¿½Úµã¡£ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½i ï¿½Úµï¿½ï¿½Ö¸ï¿½ë¡£
+// ï¿½ï¿½ï¿½Ú´ï¿½i ï¿½Úµï¿½ï¿½ï¿½Ð»ï¿½È¡Ò»ï¿½ï¿½ï¿½ï¿½ï¿½i ï¿½Úµï¿½ï¿½ï¿½î£¬ï¿½ï¿½ï¿½ï¿½i ï¿½Úµï¿½Î»Í¼ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½i ï¿½Úµã¡£
 struct m_inode * new_inode(int dev)
 {
 	struct m_inode * inode;
@@ -250,60 +250,60 @@ struct m_inode * new_inode(int dev)
 	struct buffer_head * bh;
 	int i,j;
 
-// ´ÓÄÚ´æi ½Úµã±í(inode_table)ÖÐ»ñÈ¡Ò»¸ö¿ÕÏÐi ½ÚµãÏî(inode)¡£
+// ï¿½ï¿½ï¿½Ú´ï¿½i ï¿½Úµï¿½ï¿½(inode_table)ï¿½Ð»ï¿½È¡Ò»ï¿½ï¿½ï¿½ï¿½ï¿½i ï¿½Úµï¿½ï¿½ï¿½(inode)ï¿½ï¿½
 	if (!(inode=get_empty_inode()))
 		return NULL;
-// ¶ÁÈ¡Ö¸¶¨Éè±¸µÄ³¬¼¶¿é½á¹¹¡£
+// ï¿½ï¿½È¡Ö¸ï¿½ï¿½ï¿½è±¸ï¿½Ä³ï¿½ï¿½ï¿½ï¿½ï¿½á¹¹ï¿½ï¿½
 	if (!(sb = get_super(dev)))
 		panic("new_inode with unknown device");
-// É¨Ãèi ½ÚµãÎ»Í¼£¬Ñ°ÕÒÊ×¸ö0 ±ÈÌØÎ»£¬Ñ°ÕÒ¿ÕÏÐ½Úµã£¬»ñÈ¡·ÅÖÃ¸Ãi ½ÚµãµÄ½ÚµãºÅ¡£
+// É¨ï¿½ï¿½i ï¿½Úµï¿½Î»Í¼ï¿½ï¿½Ñ°ï¿½ï¿½ï¿½×¸ï¿½0 ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½Ñ°ï¿½Ò¿ï¿½ï¿½Ð½Úµã£¬ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ã¸ï¿½i ï¿½Úµï¿½Ä½Úµï¿½Å¡ï¿½
 	j = 8192;
 	for (i=0 ; i<8 ; i++)
 		if (bh=sb->s_imap[i])
 			if ((j=find_first_zero(bh->b_data))<8192)
 				break;
-// Èç¹ûÈ«²¿É¨ÃèÍê»¹Ã»ÕÒµ½£¬»òÕßÎ»Í¼ËùÔÚµÄ»º³å¿éÎÞÐ§(bh=NULL)Ôò·µ»Ø0£¬ÍË³ö£¨Ã»ÓÐ¿ÕÏÐi ½Úµã£©¡£
+// ï¿½ï¿½ï¿½È«ï¿½ï¿½É¨ï¿½ï¿½ï¿½ê»¹Ã»ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»Í¼ï¿½ï¿½ï¿½ÚµÄ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§(bh=NULL)ï¿½ò·µ»ï¿½0ï¿½ï¿½ï¿½Ë³ï¿½Ã»ï¿½Ð¿ï¿½ï¿½ï¿½i ï¿½Úµã£©ï¿½ï¿½
 	if (!bh || j >= 8192 || j+i*8192 > sb->s_ninodes) {
 		iput(inode);
 		return NULL;
 	}
-// ÖÃÎ»¶ÔÓ¦ÐÂi ½ÚµãµÄi ½ÚµãÎ»Í¼ÏàÓ¦±ÈÌØÎ»£¬Èç¹ûÒÑ¾­ÖÃÎ»£¬Ôò³ö´í¡£
+// ï¿½ï¿½Î»ï¿½ï¿½Ó¦ï¿½ï¿½i ï¿½Úµï¿½ï¿½i ï¿½Úµï¿½Î»Í¼ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if (set_bit(j,bh->b_data))
 		panic("new_inode: bit already set");
-// ÖÃi ½ÚµãÎ»Í¼ËùÔÚ»º³åÇøÒÑÐÞ¸Ä±êÖ¾¡£
+// ï¿½ï¿½i ï¿½Úµï¿½Î»Í¼ï¿½ï¿½ï¿½Ú»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸Ä±ï¿½Ö¾ï¿½ï¿½
 	bh->b_dirt = 1;
-// ³õÊ¼»¯¸Ãi ½Úµã½á¹¹¡£
-	inode->i_count=1;		// ÒýÓÃ¼ÆÊý¡£
-	inode->i_nlinks=1;		// ÎÄ¼þÄ¿Â¼ÏîÁ´½ÓÊý¡£
-	inode->i_dev=dev;		// i ½ÚµãËùÔÚµÄÉè±¸ºÅ¡£
-	inode->i_uid=current->euid;		// i ½ÚµãËùÊôÓÃ»§id¡£
-	inode->i_gid=current->egid;		// ×éid¡£
-	inode->i_dirt=1;			// ÒÑÐÞ¸Ä±êÖ¾ÖÃÎ»¡£
-	inode->i_num = j + i*8192;	// ¶ÔÓ¦Éè±¸ÖÐµÄi ½ÚµãºÅ¡£
-	inode->i_mtime = inode->i_atime = inode->i_ctime = CURRENT_TIME;	// ÉèÖÃÊ±¼ä¡£
-	return inode;	// ·µ»Ø¸Ãi ½ÚµãÖ¸Õë¡£
+// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½i ï¿½Úµï¿½á¹¹ï¿½ï¿½
+	inode->i_count=1;		// ï¿½ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½
+	inode->i_nlinks=1;		// ï¿½Ä¼ï¿½Ä¿Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	inode->i_dev=dev;		// i ï¿½Úµï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½è±¸ï¿½Å¡ï¿½
+	inode->i_uid=current->euid;		// i ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½idï¿½ï¿½
+	inode->i_gid=current->egid;		// ï¿½ï¿½idï¿½ï¿½
+	inode->i_dirt=1;			// ï¿½ï¿½ï¿½Þ¸Ä±ï¿½Ö¾ï¿½ï¿½Î»ï¿½ï¿½
+	inode->i_num = j + i*8192;	// ï¿½ï¿½Ó¦ï¿½è±¸ï¿½Ðµï¿½i ï¿½Úµï¿½Å¡ï¿½
+	inode->i_mtime = inode->i_atime = inode->i_ctime = CURRENT_TIME;	// ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä¡£
+	return inode;	// ï¿½ï¿½ï¿½Ø¸ï¿½i ï¿½Úµï¿½Ö¸ï¿½ë¡£
 }
 
 /*
-	±¾³ÌÐòµÄ¹¦ÄÜºÍ×÷ÓÃ¼´¼òµ¥ÓÖÇåÎú£¬Ö÷ÒªÓÃÓÚ¶Ôi ½ÚµãÎ»Í¼ºÍÂß¼­¿éÎ»Í¼½øÐÐÊÍ·ÅºÍ
-Õ¼ÓÃ´¦Àí¡£²Ù×÷i ½ÚµãÎ»Í¼µÄº¯ÊýÊÇfree_inode()ºÍnew_inode()£¬²Ù×÷Âß¼­¿éÎ»Í¼µÄº¯Êý
-ÊÇfree_block()ºÍnew_block()¡£
-	º¯Êýfree_block()ÓÃÓÚÊÍ·ÅÖ¸¶¨Éè±¸dev ÉÏÊý¾ÝÇøÖÐµÄÂß¼­¿éblock¡£¾ßÌå²Ù×÷ÊÇ¸´Î»
-Ö¸¶¨Âß¼­¿éblock¶ÔÓ¦Âß¼­¿éÎ»Í¼ÖÐµÄ±ÈÌØÎ»¡£ËüÊ×ÏÈÈ¡Ö¸¶¨Éè±¸dev µÄ³¬¼¶¿é£¬²¢¸ù¾Ý³¬
-¼¶¿éÉÏ¸ø³öµÄÉè±¸Êý¾ÝÂß¼­¿éµÄ·¶Î§£¬ÅÐ¶ÏÂß¼­¿éºÅblock µÄÓÐÐ§ÐÔ¡£È»ºóÔÚ¸ßËÙ»º³åÇøÖÐ
-½øÐÐ²éÕÒ£¬¿´¿´Ö¸¶¨µÄÂß¼­¿éÏÖÔÚÊÇ·ñÕýÔÚ¸ßËÙ»º³åÇøÖÐ£¬ÈôÊÇ£¬Ôò½«¶ÔÓ¦µÄ»º³å¿éÊÍ·Åµô¡£
-½Ó×Å¼ÆËãblock ´ÓÊý¾ÝÇø¿ªÊ¼ËãÆðµÄÊý¾ÝÂß¼­¿éºÅ£¨´Ó1¿ªÊ¼¼ÆÊý£©£¬²¢¶ÔÂß¼­¿é(Çø¶Î)Î»Í¼
-½øÐÐ²Ù×÷£¬¸´Î»¶ÔÓ¦µÄ±ÈÌØÎ»¡£×îºó¸ù¾ÝÂß¼­¿éºÅÉèÖÃÏàÓ¦Âß¼­¿éÎ»Í¼ÔÚ»º³åÇøÖÐ¶ÔÓ¦µÄ
-»º³å¿éµÄÒÑÐÞ¸Ä±êÖ¾¡£
-	º¯Êýnew_block()ÓÃÓÚÏòÉè±¸dev ÉêÇëÒ»¸öÂß¼­¿é£¬·µ»ØÂß¼­¿éºÅ¡£²¢ÖÃÎ»Ö¸¶¨Âß¼­¿é
-block ¶ÔÓ¦µÄÂß¼­¿éÎ»Í¼±ÈÌØÎ»¡£ËüÊ×ÏÈÈ¡Ö¸¶¨Éè±¸dev µÄ³¬¼¶¿é¡£È»ºó¶ÔÕû¸öÂß¼­¿éÎ»Í¼
-½øÐÐËÑË÷£¬Ñ°ÕÒÊ×¸öÊÇ0 µÄ±ÈÌØÎ»¡£ÈôÃ»ÓÐÕÒµ½£¬ÔòËµÃ÷ÅÌÉè±¸¿Õ¼äÒÑÓÃÍê£¬·µ»Ø0¡£·ñÔò
-½«¸Ã±ÈÌØÎ»ÖÃÎª1£¬±íÊ¾Õ¼ÓÃ¶ÔÓ¦µÄÊý¾ÝÂß¼­¿é¡£²¢½«¸Ã±ÈÌØÎ»ËùÔÚ»º³å¿éµÄÒÑÐÞ¸Ä±êÖ¾ÖÃÎ»¡£
-½Ó×Å¼ÆËã³öÊý¾ÝÂß¼­¿éµÄÅÌ¿éºÅ£¬²¢ÔÚ¸ßËÙ»º³åÇøÖÐÉêÇëÏàÓ¦µÄ»º³å¿é£¬²¢°Ñ¸Ã»º³å¿éÇåÁã¡£
-È»ºóÉèÖÃ¸Ã»º³å¿éµÄÒÑ¸üÐÂºÍÒÑÐÞ¸Ä±êÖ¾¡£×îºóÊÍ·Å¸Ã»º³å¿é£¬ÒÔ±ãÆäËü³ÌÐòÊ¹ÓÃ£¬²¢·µ»Ø
-ÅÌ¿éºÅ£¨Âß¼­¿éºÅ£©¡£
-	º¯Êýfree_inode()ÓÃÓÚÊÍ·ÅÖ¸¶¨µÄi ½Úµã£¬²¢¸´Î»¶ÔÓ¦µÄi ½ÚµãÎ»Í¼±ÈÌØÎ»£»new_inode()
-ÓÃÓÚÎªÉè±¸dev½¨Á¢Ò»¸öÐÂi ½Úµã¡£·µ»Ø¸ÃÐÂi ½ÚµãµÄÖ¸Õë¡£Ö÷Òª²Ù×÷¹ý³ÌÊÇÔÚÄÚ´æi ½Úµã±í
-ÖÐ»ñÈ¡Ò»¸ö¿ÕÏÐi ½Úµã±íÏî£¬²¢´Ói ½ÚµãÎ»Í¼ÖÐÕÒÒ»¸ö¿ÕÏÐi ½Úµã¡£ÕâÁ½¸öº¯ÊýµÄ´¦Àí¹ý³Ì
-ÓëÉÏÊöÁ½¸öº¯ÊýÀàËÆ£¬Òò´ËÕâÀï¾Í²»ÓÃÔÙ×¸Êö¡£
+	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¹ï¿½ï¿½Üºï¿½ï¿½ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½Ú¶ï¿½i ï¿½Úµï¿½Î»Í¼ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½Î»Í¼ï¿½ï¿½ï¿½ï¿½ï¿½Í·Åºï¿½
+Õ¼ï¿½Ã´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½i ï¿½Úµï¿½Î»Í¼ï¿½Äºï¿½ï¿½ï¿½ï¿½ï¿½free_inode()ï¿½ï¿½new_inode()ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½Î»Í¼ï¿½Äºï¿½ï¿½ï¿½
+ï¿½ï¿½free_block()ï¿½ï¿½new_block()ï¿½ï¿½
+	ï¿½ï¿½ï¿½ï¿½free_block()ï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½Ö¸ï¿½ï¿½ï¿½è±¸dev ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ß¼ï¿½ï¿½ï¿½blockï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½Î»
+Ö¸ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½blockï¿½ï¿½Ó¦ï¿½ß¼ï¿½ï¿½ï¿½Î»Í¼ï¿½ÐµÄ±ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡Ö¸ï¿½ï¿½ï¿½è±¸dev ï¿½Ä³ï¿½ï¿½ï¿½ï¿½é£¬ï¿½ï¿½ï¿½ï¿½Ý³ï¿½
+ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½Ä·ï¿½Î§ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ß¼ï¿½ï¿½ï¿½ï¿½block ï¿½ï¿½ï¿½ï¿½Ð§ï¿½Ô¡ï¿½È»ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½Ù»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ï¿½ï¿½ï¿½Ð²ï¿½ï¿½Ò£ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½Ù»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½ï¿½ï¿½Ç£ï¿½ï¿½ò½«¶ï¿½Ó¦ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½Í·Åµï¿½
+ï¿½ï¿½ï¿½Å¼ï¿½ï¿½ï¿½block ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½Å£ï¿½ï¿½ï¿½1ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½)Î»Í¼
+ï¿½ï¿½ï¿½Ð²ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½Ó¦ï¿½Ä±ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ß¼ï¿½ï¿½ï¿½Î»Í¼ï¿½Ú»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½Ó¦ï¿½ï¿½
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸Ä±ï¿½Ö¾ï¿½ï¿½
+	ï¿½ï¿½ï¿½ï¿½new_block()ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è±¸dev ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ß¼ï¿½ï¿½é£¬ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½Å¡ï¿½ï¿½ï¿½ï¿½ï¿½Î»Ö¸ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½
+block ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½Î»Í¼ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡Ö¸ï¿½ï¿½ï¿½è±¸dev ï¿½Ä³ï¿½ï¿½ï¿½ï¿½é¡£È»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½Î»Í¼
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ°ï¿½ï¿½ï¿½×¸ï¿½ï¿½ï¿½0 ï¿½Ä±ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½è±¸ï¿½Õ¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê£¬ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ï¿½ï¿½ï¿½Ã±ï¿½ï¿½ï¿½Î»ï¿½ï¿½Îª1ï¿½ï¿½ï¿½ï¿½Ê¾Õ¼ï¿½Ã¶ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½é¡£ï¿½ï¿½ï¿½ï¿½ï¿½Ã±ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½Ú»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸Ä±ï¿½Ö¾ï¿½ï¿½Î»ï¿½ï¿½
+ï¿½ï¿½ï¿½Å¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½Ì¿ï¿½Å£ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½Ù»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½Ä»ï¿½ï¿½ï¿½é£¬ï¿½ï¿½ï¿½Ñ¸Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã¡£
+È»ï¿½ï¿½ï¿½ï¿½ï¿½Ã¸Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¸ï¿½ï¿½Âºï¿½ï¿½ï¿½ï¿½Þ¸Ä±ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í·Å¸Ã»ï¿½ï¿½ï¿½é£¬ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ï¿½Ì¿ï¿½Å£ï¿½ï¿½ß¼ï¿½ï¿½ï¿½Å£ï¿½ï¿½ï¿½
+	ï¿½ï¿½ï¿½ï¿½free_inode()ï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½i ï¿½Úµã£¬ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½Ó¦ï¿½ï¿½i ï¿½Úµï¿½Î»Í¼ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½new_inode()
+ï¿½ï¿½ï¿½ï¿½Îªï¿½è±¸devï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½i ï¿½Úµã¡£ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½i ï¿½Úµï¿½ï¿½Ö¸ï¿½ë¡£ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú´ï¿½i ï¿½Úµï¿½ï¿½
+ï¿½Ð»ï¿½È¡Ò»ï¿½ï¿½ï¿½ï¿½ï¿½i ï¿½Úµï¿½ï¿½ï¿½î£¬ï¿½ï¿½ï¿½ï¿½i ï¿½Úµï¿½Î»Í¼ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½i ï¿½Úµã¡£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í²ï¿½ï¿½ï¿½ï¿½ï¿½×¸ï¿½ï¿½
 */
